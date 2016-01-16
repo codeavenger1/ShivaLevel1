@@ -24,11 +24,9 @@ public class simonSays extends KeyAdapter {
 	private int imageIndex;
 	private int tries = 0;
 	private int simonSays = 0;
-	Date timeAtStart;
+	Date timeAtStart = new Date();
 	int randomSays = 0;
 	int points = 0;
-	
-	
 	private void makeAlbum() {
 		// 2. add 4 images which match keyboard keys like this: images.put(new
 		// Integer(KeyEvent.VK_UP), "image.jpg");
@@ -94,8 +92,12 @@ public class simonSays extends KeyAdapter {
 		tries += 1;
 		// 14. if tries is greater than 9 (or however many you want)
 		if (tries == 10) {
+			Date timeAtEnd = new Date();
 			JOptionPane.showMessageDialog(null, "Your total score is: " + points);
-			System.exit(0);
+			
+		JOptionPane.showMessageDialog( null, "You took this many miliseconds to complete the game" + ((timeAtEnd.getTime()-timeAtStart.getTime())));
+			  System.exit(0);
+			
 		}
 		// 15. exit the program
 		
@@ -130,8 +132,9 @@ public class simonSays extends KeyAdapter {
 		} else {
 			speak("Press this key");
 		}
-		System.out.println(randomSays);
 		
+		
+		System.out.println(randomSays);
 		
 	}
 
