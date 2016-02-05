@@ -17,7 +17,7 @@ public class OpticalIllusions extends MouseAdapter {
 
 	// 1. Make a Frame variable and initialize it using "new Frame()"
 	JFrame frame = new JFrame();
- 
+	JLabel optical;
 	private void makeAlbum() throws MalformedURLException {
 		// 2. Make the frame visible
 		frame.setVisible(true);
@@ -28,22 +28,30 @@ public class OpticalIllusions extends MouseAdapter {
 		// 5. make a variable. make it hold the location of your image. e.g. “/Users/illusion.jpg”
 		
 	String illusion = "hqdefault.jpg";
-	String illu = "maxrsdefault.jpg";
-		
+	
 		// 6. create a variable of type "JLabel" but don’t initialize it
-	JLabel optical;
+	
 		// 7. use one of the the "loadImage..." methods below to initialize your JLabel
-	 optical = loadImageFromTheInternet(illusion);
+	 optical = loadImageFromComputer(illusion);
 		// 8. add the JLabel to the frame
 	 frame.add(optical);
 		// 9. call the pack() method on the frame
+	 frame.pack();
 		// 10. add a mouse listener ("this") to your frame
+	 frame.addMouseListener(this);
 	}
 
 	public void mousePressed(MouseEvent e) {
 		// 11. Print to the console when the mouse is pressed
+		System.out.println("mousePressed");
 		// 12. remove everything from the frame (the image will not disappear until step 14)
+		frame.remove(optical);
 		// 13. load a new image like before (this is more than one line of code)
+		String illu = "maxresdefault.jpg";
+		optical = loadImageFromComputer(illu);
+		frame.add(optical);
+	 frame.pack();
+	 frame.addMouseListener(this);
 		// 14. pack the frame
 	}
 
@@ -65,7 +73,7 @@ public class OpticalIllusions extends MouseAdapter {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new PhotoAlbum().makeAlbum();
+		new OpticalIllusions().makeAlbum();
 	}
 }
 
