@@ -29,7 +29,7 @@ import javax.swing.JPanel;
 public class Jeopardy implements ActionListener {
 	private JButton firstButton;
 	private JButton secondButton;
-	private JButton thirdButton, fourthButton;
+	private JButton thirdButton, fourthButton, fifthButton, sixButton;
 
 	private JPanel quizPanel;
 	int score = 0;
@@ -50,26 +50,43 @@ public class Jeopardy implements ActionListener {
 		// 2. Give your frame a title
 		frame.setTitle("Jeopardy");
 		// 3. Create a JPanel variable to hold the header using the createHeader method
-		JPanel panel = createHeader("How Well Do You Know Ice Cream?");
+		JPanel panel = createHeader("Music and the Artists");
 
 		// 4. Add the header component to the quizPanel
 		quizPanel.add(panel);
 		// 5. Add the quizPanel to the frame
 		frame.add(quizPanel);
 		// 6. Use the createButton method to set the value of firstButton
-		firstButton = createButton("100");
+		firstButton = createButton("$200");
 		// 7. Add the firstButton to the quizPanel
 		quizPanel.add(firstButton);
 		// 8. Write the code inside the createButton() method below. Check that your game looks like Figure 1 in the
 		// Jeopardy Handout - http://bit.ly/1bvnvd4.
 
 		// 9. Use the secondButton variable to hold a button using the createButton method
-		secondButton = createButton("$200");
+		secondButton = createButton("$400");
 		// 10. Add the secondButton to the quizPanel
 		quizPanel.add(secondButton);
+
+		thirdButton = createButton("$600");
+		quizPanel.add(thirdButton);
+
+		fourthButton = createButton("$800");
+		quizPanel.add(fourthButton);
+
+		fifthButton = createButton("$1000");
+		quizPanel.add(fifthButton);
+
+		sixButton = createButton("Instructions");
+		quizPanel.add(sixButton);
+
 		// 11. Add action listeners to the buttons (2 lines of code)
 		firstButton.addActionListener(this);
 		secondButton.addActionListener(this);
+		thirdButton.addActionListener(this);
+		fourthButton.addActionListener(this);
+		fifthButton.addActionListener(this);
+		sixButton.addActionListener(this);
 		// 12. Fill in the actionPerformed() method below
 
 		frame.pack();
@@ -102,15 +119,39 @@ public class Jeopardy implements ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
 		// Remove this temporary message:
-		JOptionPane.showMessageDialog(null, "pressed " + ((JButton) arg0.getSource()).getText() + " button");
 
 		// Use the method that plays the jeopardy theme music.
 		playJeopardyTheme();
 		JButton buttonPressed = (JButton) arg0.getSource();
 		// If the buttonPressed was the firstButton
-		if (buttonPressed.equals(firstButton)) {
-			askQuestion("Name an ice cream flavor with the name mint_________?", "What is chocolate?", 100);
+		if (buttonPressed.equals(sixButton)) {
+			JOptionPane.showMessageDialog(null,
+					"INSTRUCTIONS: HOW TO JEOPARDY!!!" + "1. Click an amount of money on the game board"
+							+ " 2. You must answer the question in a 'Who is' 'What is' or 'When is' format"
+							+ " 3. If you get the answer correct you earn the question value money. Whereas if you fail to get the question correct, you lose the value of money the question may contain from your current amount of money."
+							+ " 4. The game is over when you have as much money as you want :)");
 		}
+
+		if (buttonPressed.equals(firstButton)) {
+			askQuestion("Taylor Swift was born in this year. Hint: She named one on of her albums this", " 'When is 1989?'", 200);
+		}
+
+		if (buttonPressed.equals(secondButton)) {
+			askQuestion("One word -- HELLO!", " 'Who is Adele?'", 400);
+		}
+
+		if (buttonPressed.equals(thirdButton)) {
+			askQuestion("Twenty One Pilots sang this hit song.", " 'What is Stressed Out?'", 600);
+		}
+
+		if (buttonPressed.equals(fourthButton)) {
+			askQuestion("Who performed in the Superbowl this year? (2016)", " 'Who is Beyonce, Coldplay, and Bruno Mars?'", 800);
+		}
+
+		if (buttonPressed.equals(fifthButton)) {
+			askQuestion("How many licks does it take to get to the center of a tootsie pop?", "--actually, i dont know, figure it out on ur own time. trollolololol", 1000);
+		}
+
 		// Call the askQuestion() method
 
 		// Fill in the askQuestion() method. When you play the game, the score should change.
@@ -125,23 +166,28 @@ public class Jeopardy implements ActionListener {
 
 	private void askQuestion(String question, String correctAnswer, int prizeMoney) {
 		// Remove this temporary message
-		JOptionPane.showMessageDialog(null, "this is where the question will be asked");
+
 		// Use a pop up to ask the user the question
+		String Pilots = JOptionPane.showInputDialog(null, question);
+		if (Pilots.equals(correctAnswer)) {
+			score = score + prizeMoney;
+			updateScore();
+			JOptionPane.showMessageDialog(null, "You are . . . CORRECT!! Click another amount of money to continue playing.");
+		}
+
+		else {
+			score = score - prizeMoney;
+			JOptionPane.showMessageDialog(null, "UH NO. The correct answer is" + correctAnswer + " Click another amount of money to continue playing.");
+			updateScore();
+		}
 
 		// If the answer is correct
-
 		// Increase the score by the prizeMoney
-
 		// Call the updateScore() method
-
 		// Pop up a message to tell the user they were correct
-
 		// Otherwise
-
 		// Decrement the score by the prizeMoney
-
 		// Pop up a message to tell the user the correct answer
-
 		// Call the updateScore() method
 
 	}
