@@ -125,27 +125,29 @@ public class Jeopardy implements ActionListener {
 		JButton buttonPressed = (JButton) arg0.getSource();
 		// If the buttonPressed was the firstButton
 		if (buttonPressed.equals(sixButton)) {
+			JOptionPane.showMessageDialog(null, "INSTRUCTIONS: HOW TO JEOPARDY!!!");
+			JOptionPane.showMessageDialog(null, " 1. Click an amount of money on the game board");
+			JOptionPane.showMessageDialog(null, " 2. You must answer the question in a 'Who is' 'What is' or 'When is' format");
 			JOptionPane.showMessageDialog(null,
-					"INSTRUCTIONS: HOW TO JEOPARDY!!!" + "1. Click an amount of money on the game board"
-							+ " 2. You must answer the question in a 'Who is' 'What is' or 'When is' format"
-							+ " 3. If you get the answer correct you earn the question value money. Whereas if you fail to get the question correct, you lose the value of money the question may contain from your current amount of money."
-							+ " 4. The game is over when you have as much money as you want :)");
+					" 3. If you get the answer correct you earn the question value money. Whereas if you fail to get the question correct, you lose the value of money the question may contain from your current amount of money.");
+			JOptionPane.showMessageDialog(null, " 4. The game is over when you have as much money as you want :)");
+
 		}
 
 		if (buttonPressed.equals(firstButton)) {
-			askQuestion("Taylor Swift was born in this year. Hint: She named one on of her albums this", " 'When is 1989?'", 200);
+			askQuestion("Taylor Swift was born in this year. Hint: She named one on of her albums this", "When is 1989?", 200);
 		}
 
 		if (buttonPressed.equals(secondButton)) {
-			askQuestion("One word -- HELLO!", " 'Who is Adele?'", 400);
+			askQuestion("One word -- HELLO!", "Who is Adele?", 400);
 		}
 
 		if (buttonPressed.equals(thirdButton)) {
-			askQuestion("Twenty One Pilots sang this hit song.", " 'What is Stressed Out?'", 600);
+			askQuestion("Twenty One Pilots sang this hit song.", "What is Stressed Out?", 600);
 		}
 
 		if (buttonPressed.equals(fourthButton)) {
-			askQuestion("Who performed in the Superbowl this year? (2016)", " 'Who is Beyonce, Coldplay, and Bruno Mars?'", 800);
+			askQuestion("Who performed in the Superbowl this year? (2016)", "Who is Beyonce, Coldplay, and Bruno Mars?", 800);
 		}
 
 		if (buttonPressed.equals(fifthButton)) {
@@ -161,7 +163,7 @@ public class Jeopardy implements ActionListener {
 		// Call the askQuestionRecipe with a harder question
 
 		// Clear the button text (set the button text to nothing)
-
+		buttonPressed.setText("");
 	}
 
 	private void askQuestion(String question, String correctAnswer, int prizeMoney) {
@@ -173,12 +175,14 @@ public class Jeopardy implements ActionListener {
 			score = score + prizeMoney;
 			updateScore();
 			JOptionPane.showMessageDialog(null, "You are . . . CORRECT!! Click another amount of money to continue playing.");
+			clip.stop();
 		}
 
 		else {
 			score = score - prizeMoney;
-			JOptionPane.showMessageDialog(null, "UH NO. The correct answer is" + correctAnswer + " Click another amount of money to continue playing.");
+			JOptionPane.showMessageDialog(null, "UH NO. The correct answer is '" + correctAnswer + "' Click another amount of money to continue playing.");
 			updateScore();
+			clip.stop();
 		}
 
 		// If the answer is correct
@@ -192,10 +196,12 @@ public class Jeopardy implements ActionListener {
 
 	}
 
+	Clip clip;
+
 	public void playJeopardyTheme() {
 		try {
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("/Users/League/Google Drive/league-sounds/jeopardy.wav"));
-			Clip clip = AudioSystem.getClip();
+			clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
 			clip.start();
 		} catch (Exception ex) {
@@ -206,6 +212,7 @@ public class Jeopardy implements ActionListener {
 	private void playSound(String fileName) {
 		AudioClip scream = JApplet.newAudioClip(getClass().getResource(fileName));
 		scream.play();
+
 	}
 
 	private Component makeScorePanel() {
