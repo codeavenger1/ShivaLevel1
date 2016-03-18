@@ -1,28 +1,48 @@
+import java.awt.Button;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URI;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class CutenessTV {
+public class CutenessTV implements ActionListener{
+	JButton Duck;
+	
 public static void main(String[] args) {
 	
-	
+	CutenessTV tv = new CutenessTV(); 
+	tv.showCutenessTV();
 	
 }
 
 void showCutenessTV() {
 	JFrame frame = new JFrame();
+	frame.setVisible(true);
 	frame.setSize(800,800);
 	JPanel panel = new JPanel();
-	JButton Duck = new JButton();
+	 Duck = new JButton();
 	frame.add(panel);
 	panel.add(Duck);
+	Duck.setText("Duck");
+
+	JButton Frog = new JButton();
+	frame.add(panel);
+	panel.add(Frog);
+	Frog.setText("Frog");
+	
+	JButton FluffyUnicorns = new JButton();
+	frame.add(panel);
+	panel.add(FluffyUnicorns);
+	FluffyUnicorns.setText("Unicorn");
+	
+	
 	
 }
 
 void showDucks() {
-		playVideo("EpiGS-3PDU8");
+		playVideo("Drirjl5K9Yk");
 	}
 
 	void showFrog() {
@@ -39,6 +59,15 @@ void showDucks() {
 			java.awt.Desktop.getDesktop().browse(uri);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == Duck)
+		{
+			showDucks();
 		}
 	}
 
