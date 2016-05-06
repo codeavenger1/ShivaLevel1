@@ -21,7 +21,7 @@ public class TurtlePond implements KeyEventDispatcher {
 	int cookieY = 100;
 
 	// 2. Choose the speed you want the Tortoise to go at
-	int speed = 10;
+	int speed = 5;
 
 	void setup() {
 		// 3. Edit this intro message to your own style
@@ -29,7 +29,7 @@ public class TurtlePond implements KeyEventDispatcher {
 				"Move the turtle with the arrow keys to find the hidden cookie.\nYou'll get warmer the closer you get.\n\nBetter hurry, before she dies of hunger!");
 
 		// 4. For debugging purposes, show the cookie. The user won’t see this.
-		showCookie();
+		
 	}
 
 	private void goUp() {
@@ -43,7 +43,7 @@ public class TurtlePond implements KeyEventDispatcher {
 	private void goLeft() {
 		// 5. make the tortoise move left at the specified speed (3 lines of code)
 		Tortoise.turn(-90);
-		Tortoise.move(10);
+		Tortoise.move(5);
 		Tortoise.turn(90);
 	}
 
@@ -62,18 +62,38 @@ public class TurtlePond implements KeyEventDispatcher {
 		// 7. If the Tortoise is within 100 pixels of the food, set the background color to yellow
 		if (Math.abs(cookieX - Tortoise.getX()) < 100 && Math.abs(cookieY - Tortoise.getY()) < 100) {
 			System.out.println("within 100");
+			Tortoise.getBackgroundWindow().setBackground(Color.YELLOW);
+		
 		}
 
 		// 8. If the Tortoise is within 50 pixels of the food, set the background color to orange
-
+		if (Math.abs(cookieX - Tortoise.getX()) < 50 && Math.abs(cookieY - Tortoise.getY()) < 50) {
+			System.out.println("within 50");
+			Tortoise.getBackgroundWindow().setBackground(Color.ORANGE);
+		}
 		// 9. If the Tortoise is within 20 pixels of the food, set the background color to red
-
+		if (Math.abs(cookieX - Tortoise.getX()) < 20 && Math.abs(cookieY - Tortoise.getY()) < 20) {
+			System.out.println("within 20");
+			Tortoise.getBackgroundWindow().setBackground(Color.RED);
+		}
 		// 10. If the Tortoise is within 5 pixels of the cookie, make a pop-up to tell them they found it
-
+		if (Math.abs(cookieX - Tortoise.getX()) < 5 && Math.abs(cookieY - Tortoise.getY()) < 5) {
+			System.out.println("FOUND COOKIE ~ FOUND COOKIE ~ FOUND COOKIE");
+			JOptionPane.showMessageDialog(null, "YOU FOUND THE COOKIE!!!!!!!");
+		}
 		// 11. If more than 20 seconds have elapsed, tell them the turtle died of hunger!
-
+		if(getTimeElapsed() > 20)
+		{
+			JOptionPane.showMessageDialog(null, "YOU HAVE FAILED THIS TURTLE");
+			System.exit(0);
+		}
 		// 12. If the Tortoise crosses it's own path, tell them they failed and move them back to the beginning
-
+		
+		if (wasHereBefore(Tortoise.getX(), Tortoise.getY()))
+		{
+		JOptionPane.showMessageDialog(null, "YOU HAVE FAILED THIS TURTLE");
+		System.exit(0);
+		}
 	}
 
 	private long getTimeElapsed() {
