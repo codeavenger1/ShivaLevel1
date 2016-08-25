@@ -33,7 +33,7 @@ public class SpellingBee {
 			JOptionPane.showMessageDialog(null, "Uhhh, what are you still doing here? Go!");
 			for (int i = 0; i < 10; i++) {
 				Speak(randomWord());
-				JOptionPane.showOptionDialog(null, "Ok");//title, optionType, messageType, icon, options, initialValue)
+				JOptionPane.showInputDialog(null, "Ok");//title, optionType, messageType, icon, options, initialValue)
 
 				if (randomWord().equals(words)) {
 					JOptionPane.showMessageDialog(null, "CORRECT! Good job!");
